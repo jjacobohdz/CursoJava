@@ -47,8 +47,20 @@ public class LinkedList {
         return false;
     }
 
+    // removes the first element
     void remove(int val) {
+        LinkedList dummy = new LinkedList(-1);
+        dummy.head.next = head;
+        Node current = dummy.head;
+        while (current != null && current.next != null) {
+            if (current.next.val == val) {
+                current.next = current.next.next;
+                break;
+            }
+            current = current.next;
+        }
 
+        head = dummy.head.next;
     }
 
     public static void main(String[] args) {
@@ -57,6 +69,7 @@ public class LinkedList {
         list.add(3);
         list.add(0);
         list.add(9);
+        list.remove(9);
         list.print();
         System.out.println(list.contains(3)); // true
         System.out.println(list.contains(10)); // false
