@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinarySearchTree {
     class Node {
         int val;
@@ -117,6 +120,26 @@ public class BinarySearchTree {
         }
     }
 
+    void bfs() {
+        // enqueue the root node
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        // repeat while the queue is not empty
+        while (!queue.isEmpty()) {
+            // dequeue
+            Node current = queue.poll();
+            // visit the current element
+            System.out.print(current.val + ",");
+            // add current element's children to the queue
+            if (current.left != null) {
+                queue.offer(current.left);
+            }
+            if (current.right != null) {
+                queue.offer(current.right);
+            }
+        }
+    }
+
     static void main() {
         BinarySearchTree tree = new BinarySearchTree(10);
         tree.add(8); // goes to the left of 10
@@ -130,12 +153,13 @@ public class BinarySearchTree {
         tree.add(14);
         tree.add(13);
         tree.add(16);
+        tree.bfs();
         // tree.preOrder(); // 10, 8, 2, 1, 6, 4, 3, 5, 11, 14, 13, 16
         // tree.postOrder(); // 1, 3, 5, 4, 6, 2, 8, 13, 16, 14, 11, 10
-        System.out.println(tree.contains(4)); // true
-        System.out.println(tree.contains(0)); // false
-        System.out.println(tree.contains(20)); // false
-        System.out.println(tree.contains(16)); // true
+        // System.out.println(tree.contains(4)); // true
+        // System.out.println(tree.contains(0)); // false
+        // System.out.println(tree.contains(20)); // false
+        // System.out.println(tree.contains(16)); // true
     }
 }
 
